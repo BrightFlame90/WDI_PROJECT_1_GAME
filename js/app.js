@@ -16,6 +16,8 @@ console.log('loaded');
 
 // 7.a.BONUS -- Create a function which increases the difficulty of the order when the player gets a higher score.
 
+// 7.b.BONUS -- Create a function that adds a square/circle after each round. A round is 3 correct Randomizes.
+
 // 8.Create a function where there is a 1 minute timer. When the timer runs out the game ends. Also include the final score.
 
 // 9. Create a function that loads the game and starts the counter when the start button is clicked.
