@@ -1,25 +1,15 @@
 console.log('loaded');
+// ---------- PSEUDO CODE-------------
 
-// 1. Create an variable with an array to hold the Random colours. At least six colours; red, green, blue, orange, pink, black.
+// 1. Wait for player to click start
+// 2. Start a round, which follows these steps
+// 3. Add a random number (1-4) to the sequence
+// 4. Animate the sequence to the user
+// 5. Enable user interaction with the board, and register any clicks on the Simon tiles
+// 6. While the player has not entered an incorrect response, and the number of clicks is less than the length of the sequence, wait for player input
+// 7. Continue adding rounds until the player loses
 
-// 2. Create variables for the Random colours, the Chosen Colours, timer, counter, score and round.
+// -----------RESOURCES----------------
 
-// 3. Create a function that Randomizes the colours and selects three from the array to be shown in the "matching colour" class/section.
-
-// 4. Create a function that only shows the colours for 2 seconds and then fades away.
-
-// 5. Create a function that takes the 3 random colours and displays them in random order in the "colour order" class/section.
-
-// 6. Create a function where the player can click on all 3 of the circles in "matching colour" section. When the player clicks on the circle the colour appears. If the player clicks the incorrect order then all circles return to the colour white. If the player clicks in the correct order then..
-
-// 7. Create a function where if the player wins then all colours used are pushed and a new round starts and the player gets a score of 1.
-
-// 7.a.BONUS -- Create a function which increases the difficulty of the order when the player gets a higher score.
-
-// 7.b.BONUS -- Create a function that adds a square/circle after each round. A round is 3 correct Randomizes.
-
-// 8.Create a function where there is a 1 minute timer. When the timer runs out the game ends. Also include the final score.
-
-// 9. Create a function that loads the game and starts the counter when the start button is clicked.
-
-// 10. Create a function that resets the game when it ends.
+// https://codepen.io/BenLBlood/pen/LGLEoJ
+// https://codeplanet.io/building-simon-says-javascript/
