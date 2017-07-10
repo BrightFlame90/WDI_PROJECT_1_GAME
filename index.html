@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>WDI PROJECT 1 SIMON GAME ROBERT</title>
+  <title>WDI PROJECT 1 SIMON SAYS GAME ROBERT</title>
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -18,39 +18,77 @@
     </audio>
     <!-- 1.first create a header/title called COLOURS!and write out isntructions in a h2 -->
     <header>
-      <h1>ROBERT</h1>
+      <h1>MAC</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </header>
+    <audio id="soundbuttonGre" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
+    <audio id="soundbuttonRed" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
+    <audio id="soundbuttonYel" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
+    <audio id="soundbuttonBlu" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
+    <audio id="soundbuttonWrong" src="http://www.freesound.org/data/previews/331/331912_3248244-lq.mp3"></audio>
 
+    <div class="gameContainer noSelect">
+      <div id="buttonGre" class="fourButton"></div>
+      <div id="buttonRed" class="fourButton"></div>
+      <div id="buttonYel" class="fourButton"></div>
+      <div id="buttonBlu" class="fourButton"></div>
+      <div id="center">
+        <div id="textTitle">Simon</div>
+        <div id="countBox">
+          <div id="countDisplay">
+            <div id="displayText">
+              --
+            </div>
+          </div>
+          <div id="countText">Count</div>
+        </div>
+        <div id="startBox">
+          <div id="startButton"></div>
+          <div id="startText">Start</div>
+        </div>
+        <div id="strictBox">
+          <div id="strictButton"></div>
+          <div id="strictText">Strict</div>
+        </div>
+        <div id="powerBox">
+          <div id="onText">ON</div>
+          <div id="powerSwitch">
+            <div id="buttonOn"></div
+              ><div id="buttonOff"></div
+                ></div>
+                <div id="offText">OFF</div>
+              </div>
+            </div>
+          </div>
 
-    <!-- 2.Create a div/section for the game board tiles.
-    2.a. It should be a ul list with 4 li's. -->
-    <div class="ROBERT">
-      <ul>
-        <li class="red" tile="1"></li>
-        <li class="green" tile="2"></li>
-        <li class="blue" tile="3"></li>
-        <li class="yellow" tile="4"></li>
-      </ul>
-    </div>
-    <!-- 4. Create an aside for the score board. -->
-    <aside class="ScoreBoard">
+          <!-- 2.Create a div/section for the game board tiles.
+          2.a. It should be a ul list with 4 li's. -->
+          <!-- <div class="ROBERT">
+          <ul>
+          <li class="red" tile="1"></li>
+          <li class="green" tile="2"></li>
+          <li class="blue" tile="3"></li>
+          <li class="yellow" tile="4"></li>
+        </ul>
+      </div>
+      <!- 4. Create an aside for the score board. -->
+      <!-- <aside class="ScoreBoard">
       SCOREBOARD
-    </aside>
+    </aside> -->
     <!-- 5. Create an aside for the timer. -->
-    <aside class="Timer">
-      TIMER
-    </aside>
-    <!-- 6. Create a button for 'Go'. -->
-    <button type="button" name="Start Game">Start</button>
-    <!-- 7. Create a button for 'Reset'. -->
-    <button type="button" name="Reset">Reset</button>
-    <!-- 8. Create a footer with copyright and made with love. -->
-    <footer>&#169 Made with &#9829 by Robert McCallough</footer>
+    <!-- <aside class="Timer">
+    TIMER
+  </aside> -->
+  <!-- 6. Create a button for 'Go'. -->
+  <!-- <button type="button" name="Start Game">Start</button> -->
+  <!-- 7. Create a button for 'Reset'. -->
+  <!-- <button type="button" name="Reset">Reset</button> -->
+  <!-- 8. Create a footer with copyright and made with love. -->
+  <footer>&#169 Made with &#9829 by Robert McCallough</footer>
 
-    <!-- Bonusq
-    1.Add my facebook/twitter/github links. -->
+  <!-- Bonusq
+  1.Add my facebook/twitter/github links. -->
 
 
-  </body>
-  </html>
+</body>
+</html>
