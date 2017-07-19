@@ -1,6 +1,4 @@
-body {
-  background-color: #BFF0D4;
-}
+
 /*
 1.Position header at the top of the page.
 2.Position Timer to left of the page.
@@ -9,3 +7,222 @@ body {
 6.Position start button and reset button next to each other underneath "colour match".
 7.Position footer at the bottom of the page.
 */
+
+body {
+  color: #333;
+	background-color: #222;
+	font-size: 16px;
+}
+.gameboard {
+  position: relative;
+  margin: 10% auto;
+  background-color: #ece7ee;
+  border-radius: 100%;
+  height: 500px;
+  width: 500px;
+}
+.color-button {
+  display: inline-block;
+	border: 10px solid #333;
+  margin-top: 10px;
+  margin-left: 10px;
+	height: 235px;
+	width: 235px;
+}
+#red, #blue {
+  margin-left: 5px;
+}
+#yellow, #blue  {
+	margin-top: 5px;
+}
+#blue {
+	border-bottom-right-radius: 100%;
+}
+.blue-inactive {
+  background-color : rgba(9,74,143,1);
+}
+.blue-active {
+  background-color : rgba(28,140,255,1);
+  background-image: -webkit-radial-gradient(20% 20%, circle farthest-corner,rgba(179,217,255,1), rgba(9,74,143,1));
+}
+#yellow {
+	border-bottom-left-radius: 100%;
+}
+.yellow-inactive {
+  background-color: rgba(204,167,7,1);
+}
+.yellow-active {
+  background-color: rgba(254,217,63,1);
+  background-image: -webkit-radial-gradient(80% 20%, circle farthest-corner,rgba(254,229,128,1),rgba(204,167,7,1));
+}
+#green {
+	border-top-left-radius: 100%;
+}
+.green-inactive {
+  background-color: rgba(0, 167, 74,1);
+}
+.green-active {
+  background-color: rgba(19,255,124,1);
+  background-image: -webkit-radial-gradient(80% 70%, circle farthest-corner,rgba(153,255,199,1), rgba(0,167, 74,1));
+}
+#red {
+	border-top-right-radius: 100%;
+}
+.red-inactive {
+  background-color : rgba(159,15,23,1);
+}
+.red-active {
+  background-color : rgba(255,76,76,1);
+  background-image: -webkit-radial-gradient(20% 80%, circle farthest-corner,rgba(255,153,153,1), rgba(159,15,23,1));
+}
+.center {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  margin:auto;
+  background-color: #ece7ee;
+  border: 12px solid #333;
+  border-radius: 100%;
+  width: 50%;
+  height: 50%;
+}
+.center h1 {
+  font-size: 45px;
+  padding-top: 10px;
+}
+.trademark {
+	font-size: .5em;
+}
+.controls {
+  margin-top: 32px;
+}
+.score {
+  display: inline-block;
+  float: left;
+  background-color: #32050c;
+  border: 4px solid #333;
+  border-radius: 10px;
+  height: 36px;
+  width: 50px;
+  margin-left: 22px;
+}
+.level {
+  color: #430710;
+  font-family: monospace;
+  font-size: 20px;
+}
+.level-red {
+  color: #dc0d29;
+}
+.start {
+  display: inline-block;
+  float: left;
+  margin-left: 25px;
+}
+.start button {
+  background-color: #fc0102;
+}
+.start button, .strict button {
+  border: 3px solid #333;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  outline: none;
+}
+.start button:active,
+.strict button:active {
+  border: 4px solid #333;
+}
+.strict {
+  display: inline-block;
+  float: left;
+  margin-left: 32px;
+}
+.strict button {
+  background-color: #ff0;
+}
+.strict-light {
+  position: absolute;
+  background-color: #32050c;
+  border: 2px solid #333;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  margin-left: 11px;
+  margin-top: -16px;
+}
+.strict-light-on {
+  background-color: #dc0d29;
+}
+.titles {
+  clear:both;
+  font-size: 14px;
+  font-weight: 700;
+}
+.titles span:first-child {
+  margin-left: 4px;
+}
+.titles span:nth-child(2) {
+  margin-left: 18px;
+}
+.titles span:nth-child(3) {
+  margin-left: 15px;
+}
+.onOff {
+  width: 120px;
+  height: 28px;
+  margin: 12px auto 0 auto;
+}
+.off {
+  float: left;
+}
+
+.on {
+  float: right;
+}
+.off, .on {
+  font-size: 12px;
+  font-weight: 700;
+  padding-top: 5px;
+}
+.switch-box {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #222;
+  border-radius: 4px;
+  height: 28px;
+  width: 60px;
+  padding: 2px;
+  margin: 0 auto;
+}
+.switch {
+  background-color: #3193de;
+  border-radius: 4px;
+  height: 24px;
+  width: 24px;
+}
+
+.clickable{
+  pointer-events : auto;
+  cursor: pointer;
+}
+.unclickable{
+  pointer-events:none;
+  cursor: auto;
+}
+
+@media all and (max-width: 650px) {
+  .gameboard {
+    margin: 20% auto;
+    margin-left: 3px;
+    -moz-transform: scale(0.65);
+    -ms-transform: scale(0.65);
+    -o-transform: scale(0.65);
+    -webkit-transform: scale(0.65);
+    transform: scale(0.65);
+    -o-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}
