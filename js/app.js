@@ -5,7 +5,7 @@ console.log('loaded');
 // 2. Start a round, which follows these steps
 // 3. Add a random number (1-4) to the sequence
 // 4. Animate the sequence to the user
-// 5. Enable user interaction with the board, and register any clicks on the Simon tiles
+// 5. Enable user interaction with the board, and register any clicks on the Robert tiles
 // 6. While the player has not entered an incorrect response, and the number of clicks is less than the length of the sequence, wait for player input
 // 7. Continue adding rounds until the player loses
 
@@ -137,7 +137,7 @@ $(document).ready(function() {
             playerMoves = [];
             computerMoves.push(colors[Math.floor(Math.random() * colors.length)]);
             $('.level').text(computerMoves.length);
-            simonMoves(computerMoves, timeInterval);
+            robertMoves(computerMoves, timeInterval);
           }
         }else { // wait for next player move
           $('.color-button').removeClass('unclickable');
@@ -153,14 +153,14 @@ $(document).ready(function() {
           }else {
             playerMoves = [];
             $('.level').text(computerMoves.length);
-            simonMoves(computerMoves, timeInterval);
+            robertMoves(computerMoves, timeInterval);
           }
         }, 1500);
       }
     }, timeInterval-pauseInterval-100);
   });
 
-  function simonMoves (computerMoves, timeInterval){
+  function robertMoves (computerMoves, timeInterval){
     var index=0;
     movesDisplay = setInterval(moveDisplay, timeInterval);
     function moveDisplay(){
