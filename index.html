@@ -4,55 +4,84 @@
   <meta charset="utf-8">
   <title>WDI PROJECT 1 ROBERT SAYS GAME</title>
   <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   <script src="js/app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
-<audio id="greenSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mpeg"></audio>
-<audio id="redSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" type="audio/mpeg"></audio>
-<audio id="yellowSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" type="audio/mpeg"></audio>
-<audio id="blueSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg"></audio>
-<audio id="errorSound" preload="auto" src="https://www.dropbox.com/s/6v3prg3tr008gz6/simonGameErrorSound.mp3?raw=1" type="audio/mpeg"></audio>
-<audio id="victorySound" preload="auto" src="https://www.dropbox.com/s/6csayi0ouhd0yzs/simonGameVictorySound.mp3?raw=1" type="audio/mpeg"></audio>
+  <audio id="greenSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mpeg"></audio>
+  <audio id="redSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" type="audio/mpeg"></audio>
+  <audio id="yellowSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" type="audio/mpeg"></audio>
+  <audio id="blueSound" preload="auto" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg"></audio>
+  <audio id="errorSound" preload="auto" src="https://www.dropbox.com/s/6v3prg3tr008gz6/simonGameErrorSound.mp3?raw=1" type="audio/mpeg"></audio>
+  <audio id="victorySound" preload="auto" src="https://www.dropbox.com/s/6csayi0ouhd0yzs/simonGameVictorySound.mp3?raw=1" type="audio/mpeg"></audio>
 
-<div class="container">
-  <div class="gameboard">
-    <div>
-      <div class="color-button green-inactive unclickable" id="green"></div>
-      <div class="color-button red-inactive unclickable" id="red"></div>
-    </div>
-    <div>
-      <div class="color-button yellow-inactive unclickable" id="yellow"></div>
-      <div class="color-button blue-inactive unclickable" id="blue"></div>
-    </div>
-    <div class="center text-center">
-      <h1>Robert<sup class="trademark">&reg;</sup></h1>
-      <div class="controls">
-        <div class="score">
-          <span class="level">--</span>
-        </div>
-        <div class="start">
-          <button></button>
-        </div>
-        <div class="strict">
-          <div class="strict-light"></div>
-          <button></button>
-        </div>
-        <div class="titles"><span>LEVEL</span> <span>START</span> <span>STRICT</span></div>
-        <div class="onOff">
-          <span class="off">OFF</span>
-          <div class="switch-box">
-            <div class="switch"></div>
-          </div>
-          <span class="on">ON</span>
-        </div>
+  <div class="wrapper">
+    <div class="back">
+      <div class="pad shape1">
+        <audio preload="auto" class="sound1" data-pad="1">
+          <source src="sounds/mp3/sounds_01.mp3" type="audio/mpeg"/>
+          <source src="sounds/ogg/sounds_01.ogg" type="audio/ogg"/>
+        </audio>
       </div>
-    </div> <!-- end of center -->
-  </div> <!-- end of gameboard -->
-</div> <!-- end of container -->
+
+      <div class="pad shape2">
+        <audio preload="auto" class="sound2" data-pad="2">
+          <source src="sounds/mp3/sounds_02.mp3" type="audio/mpeg"/>
+          <source src="sounds/ogg/sounds_02.ogg" type="audio/ogg"/>
+        </audio>
+      </div>
+
+      <div class="pad shape3">
+        <audio preload="auto" class="sound3" data-pad="3">
+          <source src="sounds/mp3/sounds_03.mp3" type="audio/mpeg"/>
+          <source src="sounds/ogg/sounds_03.ogg" type="audio/ogg"/>
+        </audio>
+      </div>
+
+      <div class="pad shape4">
+        <audio preload="auto" class="sound4" data-pad="4">
+          <source src="sounds/mp3/sounds_04.mp3" type="audio/mpeg"/>
+          <source src="sounds/ogg/sounds_04.ogg" type="audio/ogg"/>
+        </audio>
+      </div>
+
+      <div class="circle"></div>
+    </div>
+    <div class="level">
+      <h2>Level: 1</h2>
+    </div>
+
+    <div class="score">
+      <h2>Score: 0</h2>
+    </div>
+
+    <ul class="difficulty">
+
+      <li>
+        <input type="radio" class="difOpt" name="difficulty" value="2">Easy
+      </li>
+
+      <li>
+        <input type="radio" class="difOpt" name="difficulty" value="1" checked>Normal
+      </li>
+
+      <li>
+        <input type="radio" class="difOpt" name="difficulty" value="0.5">Hard
+      </li>
+
+      <li>
+        <input type="radio" class="difOpt" name="difficulty" value="0.25">Insane
+      </li>
+    </ul>
+
+    <div class="sButton">
+      <button class="start">start</button>
+    </div>
+
+  </div>
 </body>
 </html>

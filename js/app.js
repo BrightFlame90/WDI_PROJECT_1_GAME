@@ -1,199 +1,222 @@
-console.log('loaded');
-// ---------- PSEUDO CODE-------------
+var game={ //game object
+  level: 1, //current level
+  turn: 0, //current turn
+  difficulty: 1, // user difficulty
+  score: 0, //current score
+  active: false, //whether a turn is active or not
+  handler: false, // whether the click and sound handlers are active
+  shape: '.shape', // cached string for the pad class
+  genSequence: [], //array containing the generated/randomized pads
+  plaSequence: [], //array containing the users pad selections
 
-// 1. Wait for player to click start
-// 2. Start a round, which follows these steps
-// 3. Add a random number (1-4) to the sequence
-// 4. Animate the sequence to the user
-// 5. Enable user interaction with the board, and register any clicks on the Robert tiles
-// 6. While the player has not entered an incorrect response, and the number of clicks is less than the length of the sequence, wait for player input
-// 7. Continue adding rounds until the player loses
-
-// -----------RESOURCES----------------
-
-// https://codepen.io/BenLBlood/pen/LGLEoJ
-// https://codeplanet.io/building-simon-says-javascript/
-
-$(document).ready(function() {
-
-  var colors = ['green', 'red', 'blue', 'yellow'];
-  var computerMoves = [];
-  var playerMoves = [];
-  var isOn = false;
-  var strict = false;
-  var timeInterval = 800;
-  var pauseInterval = 200;
-  var winningMoves = 20;
-  var movesDisplay;
-  var victoryDisplay;
-
-  $('#greenSound').get(0).volume = 0.8;
-  $('#redSound').get(0).volume = 0.8;
-  $('#yellowSound').get(0).volume = 0.8;
-  $('#blueSound').get(0).volume = 0.8;
-  $('#errorSound').get(0).volume = 0.2;
-  $('#victorySound').get(0).volume = 0.2;
-
-  $('.switch-box').click(function(){
-    if (isOn) { // switch off
-      $('.switch').css('float', 'left');
-      $('.level').removeClass('level-red');
-      $('.color-button').removeClass('clickable');
-      $('.color-button').addClass('unclickable');
-      $('.level').text('--');
-      $('.strict-light').removeClass('strict-light-on');
-      $('.start button').removeClass('unclickable');
-      clearInterval(movesDisplay);
-      clearInterval(victoryDisplay);
-      deactivateAll();
-      reset();
-    }else { // switch on
-      $('.switch').css('float', 'right');
-      $('.level').text('--');
-      $('.level').addClass('level-red');
+  init: function(){					//initialises the game
+    if(this.handler === false){		//checks to see if handlers are already active
+      this.initPadHandler();		//if not activate them
     }
-    isOn = !isOn;
-  });
+    this.newGame();				//reset the game defaults
 
-  $('.strict button').click(function() {
-    if (isOn) {
-      if (strict) {
-        $('.strict-light').removeClass('strict-light-on');
-      }else {
-        $('.strict-light').addClass('strict-light-on');
+  },
+
+  initPadHandler: function(){
+
+    that=this;
+
+    $('.pad').on('mouseup',function(){
+
+      if(that.active===true){
+
+        var pad=parseInt($(this).data('pad'),10);
+
+        that.flash($(this),1,300, pad);
+
+        that.logPlayerSequence(pad);
+
       }
-      strict = !strict;
-    }
-  });
+    });
 
-  $('.start button').click(function() {
-    if (isOn) {
-      clearInterval(movesDisplay);
-      clearInterval(victoryDisplay);
-      deactivateAll();
-      $('.start button').addClass('unclickable');
-      $('.level').text('--');
-      computerMoves = [];
-      playerMoves = [];
-      computerMoves.push(colors[Math.floor(Math.random() * colors.length)]);
-      $('.level').fadeOut(0).delay(200).fadeIn(0).delay(200).fadeOut(0).delay(200).fadeIn(0).delay(200).fadeOut(0).delay(200).queue(function() {
-        $('.level').text(computerMoves.length);
-        $('.level').fadeIn(0);
-        setTimeout(function(){
-          $('#' + computerMoves[0]).addClass(computerMoves[0] + '-active');
-          $('#' + computerMoves[0] + 'Sound').get(0).play();
-          setTimeout(function(){
-            $('#' + computerMoves[0]).removeClass(computerMoves[0] + '-active');
-            $('#' + computerMoves[0] + 'Sound').get(0).pause();
-            $('#' + computerMoves[0] + 'Sound').get(0).currentTime = 0;
-            $('.color-button').removeClass('unclickable');
-            $('.color-button').addClass('clickable');
-            $('.start button').removeClass('unclickable');
-          }, timeInterval-pauseInterval);
-        }, 500);
-        $('.level').dequeue();
-      });
-    }
-  });
+    this.handler=true;
 
-  $('.color-button').click(function() {
-    var colorClicked = $(this).attr('id');
-    $('#' + colorClicked).addClass(colorClicked + '-active');
-    playerMoves.push(colorClicked);
-    $('.color-button').removeClass('clickable');
-    $('.color-button').addClass('unclickable');
-    if(playerMoves[playerMoves.length-1]===computerMoves[playerMoves.length-1]){ // correct color
-      $('#' + colorClicked + 'Sound').get(0).play();
-    }else { // wrong color
-      $('#errorSound').get(0).play();
-    }
-    setTimeout(function(){
-      $('#' + colorClicked).removeClass(colorClicked + '-active');
-      if(playerMoves[playerMoves.length-1]===computerMoves[playerMoves.length-1]){ // correct color
-        $('#' + colorClicked + 'Sound').get(0).pause();
-        $('#' + colorClicked + 'Sound').get(0).currentTime = 0;
-        if (playerMoves.length === computerMoves.length) { // correct round
-          if (playerMoves.length === winningMoves) { // victory - game over!
-            $('#victorySound').get(0).play();
-            $('.level').text(':)');
-            var flashTimes=20;
-            var index=0;
-            victoryDisplay = setInterval(victoryDisplayFunction, 100);
-            function victoryDisplayFunction(){
-              if(index>=flashTimes){
-                activateAll();
-                $('#victorySound').get(0).pause();
-                $('#victorySound').get(0).currentTime = 0;
-                clearInterval(victoryDisplay);
-              }else {
-                $('#' + colors[index%4]).addClass(colors[index%4] + '-active');
-                setTimeout(function(){
-                  $('#' + colors[index%4]).removeClass(colors[index%4] + '-active');
-                  index++;
-                }, 50);
-              }
-            }
-          }else { // go to next level(round)
-            playerMoves = [];
-            computerMoves.push(colors[Math.floor(Math.random() * colors.length)]);
-            $('.level').text(computerMoves.length);
-            robertMoves(computerMoves, timeInterval);
-          }
-        }else { // wait for next player move
-          $('.color-button').removeClass('unclickable');
-          $('.color-button').addClass('clickable');
+  },
+
+  newGame: function(){			//resets the game and generates a starts a new level
+
+    this.level=1;
+    this.score=0;
+    this.newLevel();
+    this.displayLevel();
+    this.displayScore();
+
+  },
+
+  newLevel: function(){
+
+    this.genSequence.length=0;
+    this.plaSequence.length=0;
+    this.pos=0;
+    this.turn=0;
+    this.active=true;
+
+    this.randomizePad(this.level); //randomize pad with the correct amount of numbers for this level
+    this.displaySequence(); //show the user the sequence
+
+  },
+
+  flash: function(element, times, speed, pad){ //function to make the pads appear to flash
+
+    var that = this;						//cache this
+
+    if(times > 0){							//make sure we are supposed to flash
+      that.playSound(pad);				//play the corresponding pad sound
+      element.stop().animate({opacity: '1'}, {		//animate the element to appear to flash
+        duration: 50,
+        complete: function(){
+          element.stop().animate({opacity: '0.6'}, 200);
         }
-      }else { // wrong color
-        $('.level').text('!!');
-        setTimeout(function(){
-          $('#errorSound').get(0).pause();
-          $('#errorSound').get(0).currentTime = 0;
-          if(strict) {
-            $('.start button').trigger('click');
-          }else {
-            playerMoves = [];
-            $('.level').text(computerMoves.length);
-            robertMoves(computerMoves, timeInterval);
-          }
-        }, 1500);
-      }
-    }, timeInterval-pauseInterval-100);
+      });												//end animation
+
+    }
+
+    if (times > 0) {									//call the flash function again until done the correct amount of times
+      setTimeout(function () {
+        that.flash(element, times, speed, pad);
+      }, speed);
+      times -= 1;						//times - 1 for each time it's called
+    }
+  },
+
+  playSound: function(clip){				//plays the sound that corresponds to the pad chosen
+
+
+    var sound= $('.sound'+clip)[0];
+    console.log(sound);
+    console.log($('.sound'+clip));
+    sound.currentTime=0;				//resets audio position to the start of the clip
+    sound.play();						//play the sound
+
+
+  },
+
+  randomizePad: function(passes){			//generate random numbers and push them to the generated number array iterations determined by current level
+
+    for(i=0;i<passes;i++){
+
+      this.genSequence.push(Math.floor(Math.random() * 4) + 1);
+    }
+  },
+
+  logPlayerSequence: function(pad){		//log the player selected pad to user array and call the checker function
+
+    this.plaSequence.push(pad);
+    this.checkSequence(pad);
+
+
+  },
+
+  checkSequence: function(pad){			//checker function to test if the pad the user pressed was next in the sequence
+
+    var  that = this;
+
+    if(pad !== this.genSequence[this.turn]){	//if not correct
+
+      this.incorrectSequence();
+
+    }else{									//if correct
+      this.keepScore();					//update the score
+      this.turn++;						//incrememnt the turn
+
+    }
+
+    if(this.turn === this.genSequence.length){	//if completed the whole sequence
+
+      this.level++;							//increment level, display it, disable the pads wait 1 second and then reset the game
+      this.displayLevel();
+      this.active=false;
+      setTimeout(function(){
+        that.newLevel();
+      },1000);
+    }
+  },
+
+  displaySequence: function(){					//display the generated sequence to the user
+
+    var that=this;
+
+    $.each(this.genSequence, function(index, val) {		//iterate over each value in the generated array
+
+      setTimeout(function(){
+
+        that.flash($(that.shape+val),1,300,val);
+
+      },500*index*that.difficulty);				// multiply timeout by how many items in the array so that they play sequentially and multiply by the difficulty modifier
+    });
+  },
+
+  displayLevel: function(){							//just display the current level on screen
+
+    $('.level h2').text('Level: '+this.level);
+
+  },
+
+  displayScore: function(){							//display current score on screen
+    $('.score h2').text('Score: '+this.score);
+  },
+
+  keepScore: function(){								//keep the score
+
+    var multiplier=0;
+// choose points modifier based on difficulty
+    switch(this.difficulty) {
+      case '2':
+        multiplier=1;
+        break;
+
+      case '1':
+        multiplier=2;
+        break;
+
+      case '0.5':
+        multiplier = 3;
+        break;
+
+      case '0.25':
+        multiplier = 4;
+        break;
+    }
+
+    this.score += (1 * multiplier);					//work out the score
+
+    this.displayScore();							//display score on screen
+  },
+
+  incorrectSequence: function(){						//if user makes a mistake
+
+    var corPad = this.genSequence[this.turn],		//cache the pad number that should have been pressed
+
+    that = this;
+    this.active=false;
+    this.displayLevel();
+    this.displayScore();
+
+    setTimeout(function(){							//flash the pad 4 times that should have been pressed
+      that.flash($(that.shape+corPad),4,300,corPad);
+    },500);
+
+    $('.start').show();								//enable the start button again and allow difficulty selection again
+    $('.difficulty').show();
+
+  }
+
+};
+$(document).ready(function(){							//document ready
+
+  $('.start').on('mouseup', function(){				//initialise a game when the start button is clicked
+    $(this).hide();
+    game.difficulty = $('input[name=difficulty]:checked').val();
+    $('.difficulty').hide();
+    game.init();
+
+
   });
 
-  function robertMoves (computerMoves, timeInterval){
-    var index=0;
-    movesDisplay = setInterval(moveDisplay, timeInterval);
-    function moveDisplay(){
-      if(index>=computerMoves.length){
-        $('.color-button').removeClass('unclickable');
-        $('.color-button').addClass('clickable');
-        clearInterval(movesDisplay);
-      }else {
-        $('#' + computerMoves[index]).addClass(computerMoves[index] + '-active');
-        $('#' + computerMoves[index] + 'Sound').get(0).play();
-        setTimeout(function(){
-          $('#' + computerMoves[index]).removeClass(computerMoves[index] + '-active');
-          $('#' + computerMoves[index] + 'Sound').get(0).pause();
-          $('#' + computerMoves[index] + 'Sound').get(0).currentTime = 0;
-          index++;
-        }, timeInterval-pauseInterval);
-      }
-    }
-  }
-  function activateAll(){
-    for(var i=0; i<colors.length; i++ ){
-      $('#' + colors[i]).addClass(colors[i] + '-active');
-    }
-  }
-  function deactivateAll(){
-    for(var i=0; i<colors.length; i++ ){
-      $('#' + colors[i]).removeClass(colors[i] + '-active');
-    }
-  }
-  function reset() {
-    computerMoves = [];
-    playerMoves = [];
-    strict = false;
-  }
 
-}); // end of (document).ready
+});
